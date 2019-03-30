@@ -8,7 +8,8 @@ cd $(dirname $0)/..
 LDFLAGS="-X github.com/rancher/k3s/pkg/version.Version=$VERSION -X github.com/rancher/k3s/pkg/version.GitCommit=${COMMIT:0:8} -w -s"
 STATIC="-extldflags '-static'"
 STATIC_SQLITE="-extldflags '-static -lm -ldl -lz -lpthread'"
-TAGS="ctrd apparmor seccomp no_btrfs netgo osusergo"
+#TAGS="ctrd apparmor seccomp no_btrfs netgo osusergo"
+TAGS="ctrd apparmor no_btrfs netgo osusergo"
 
 if [ "$STATIC_BUILD" != "true" ]; then
     STATIC=""
@@ -41,7 +42,8 @@ CGO_ENABLED=1 go build -tags "$TAGS" -ldflags "$LDFLAGS $STATIC_SQLITE" -o bin/h
 echo Building cni
 CGO_ENABLED=0 go build -tags "$TAGS" -ldflags "$LDFLAGS $STATIC" -o bin/cni ./cmd/cni/main.go
 echo Building runc
-make EXTRA_LDFLAGS="-w -s" BUILDTAGS="apparmor seccomp" -C ./vendor/github.com/opencontainers/runc static
+#make EXTRA_LDFLAGS="-w -s" BUILDTAGS="apparmor seccomp" -C ./vendor/github.com/opencontainers/runc static
+make EXTRA_LDFLAGS="-w -s" BUILDTAGS="apparmor" -C ./vendor/github.com/opencontainers/runc static
 cp -f ./vendor/github.com/opencontainers/runc/runc ./bin/runc
 echo Building containerd-shim
 make -C ./vendor/github.com/containerd/containerd bin/containerd-shim

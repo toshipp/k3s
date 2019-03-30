@@ -35,7 +35,7 @@ import (
 	rsystem "github.com/opencontainers/runc/libcontainer/system"
 	"k8s.io/klog"
 
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/apimachinery/pkg/util/sets"
@@ -345,6 +345,7 @@ const (
 // setupKernelTunables validates kernel tunable flags are set as expected
 // depending upon the specified option, it will either warn, error, or modify the kernel tunable flags
 func setupKernelTunables(option KernelTunableBehavior) error {
+	return nil
 	desiredState := map[string]int{
 		utilsysctl.VmOvercommitMemory: utilsysctl.VmOvercommitMemoryAlways,
 		utilsysctl.VmPanicOnOOM:       utilsysctl.VmPanicOnOOMInvokeOOMKiller,
@@ -557,7 +558,7 @@ func (cm *containerManagerImpl) Start(node *v1.Node,
 	// allocatable of the node
 	cm.nodeInfo = node
 
-	if utilfeature.DefaultFeatureGate.Enabled(kubefeatures.LocalStorageCapacityIsolation) {
+	if false && utilfeature.DefaultFeatureGate.Enabled(kubefeatures.LocalStorageCapacityIsolation) {
 		rootfs, err := cm.cadvisorInterface.RootFsInfo()
 		if err != nil {
 			return fmt.Errorf("failed to get rootfs info: %v", err)

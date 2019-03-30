@@ -46,6 +46,7 @@ type realConntracker struct{}
 var readOnlySysFSError = errors.New("readOnlySysFS")
 
 func (rct realConntracker) SetMax(max int) error {
+	return nil
 	if err := rct.setIntSysCtl("nf_conntrack_max", max); err != nil {
 		return err
 	}
