@@ -130,6 +130,7 @@ func isIgnorableError(rootless bool, err error) bool {
 }
 
 func (m *Manager) Apply(pid int) (err error) {
+	return nil
 	if m.Cgroups == nil {
 		return nil
 	}
@@ -226,6 +227,7 @@ func (m *Manager) GetStats() (*cgroups.Stats, error) {
 }
 
 func (m *Manager) Set(container *configs.Config) error {
+	return nil
 	// If Paths are set, then we are just joining cgroups paths
 	// and there is no need to set any values.
 	if m.Cgroups.Paths != nil {

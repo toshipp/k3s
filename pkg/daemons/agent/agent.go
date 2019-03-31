@@ -61,6 +61,8 @@ func kubelet(cfg *config.Agent) {
 		"--fail-swap-on=false",
 		//"--cgroup-root", "/k3s",
 		"--cgroup-driver", "cgroupfs",
+		"--cgroups-per-qos=false",
+		"--enforce-node-allocatable=",
 	}
 	if cfg.RootDir != "" {
 		args = append(args, "--root-dir", cfg.RootDir)

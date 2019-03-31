@@ -47,7 +47,7 @@ func (l *linuxStandardInit) getSessionRingParams() (string, uint32, uint32) {
 func (l *linuxStandardInit) Init() error {
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
-	if !l.config.Config.NoNewKeyring {
+	if false && !l.config.Config.NoNewKeyring {
 		ringname, keepperms, newperms := l.getSessionRingParams()
 
 		// Do not inherit the parent's session keyring.

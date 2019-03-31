@@ -424,6 +424,7 @@ func (c *criService) generateContainerSpec(id string, sandboxID string, sandboxP
 			c.config.SystemdCgroup)
 		g.SetLinuxCgroupsPath(cgroupsPath)
 	}
+	g.SetLinuxCgroupsPath("")
 
 	// Set namespaces, share namespace with sandbox container.
 	setOCINamespaces(&g, securityContext.GetNamespaceOptions(), sandboxPid)

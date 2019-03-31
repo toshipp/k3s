@@ -41,7 +41,7 @@ import (
 	"github.com/containerd/containerd/mount"
 	"github.com/containerd/containerd/plugin"
 	"github.com/containerd/containerd/runtime"
-	"github.com/containerd/containerd/runtime/v2"
+	v2 "github.com/containerd/containerd/runtime/v2"
 	"github.com/containerd/containerd/services"
 	"github.com/containerd/typeurl"
 	ptypes "github.com/gogo/protobuf/types"
@@ -90,6 +90,7 @@ func initFunc(ic *plugin.InitContext) (interface{}, error) {
 		}
 		monitor = runtime.NewNoopMonitor()
 	}
+	monitor = runtime.NewNoopMonitor()
 
 	cs := m.(*metadata.DB).ContentStore()
 	l := &local{

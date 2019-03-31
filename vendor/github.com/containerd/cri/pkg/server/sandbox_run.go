@@ -374,6 +374,7 @@ func (c *criService) generateSandboxContainerSpec(id string, config *runtime.Pod
 			c.config.SystemdCgroup)
 		g.SetLinuxCgroupsPath(cgroupsPath)
 	}
+	g.SetLinuxCgroupsPath("")
 	// When cgroup parent is not set, containerd-shim will create container in a child cgroup
 	// of the cgroup itself is in.
 	// TODO(random-liu): [P2] Set default cgroup path if cgroup parent is not specified.
